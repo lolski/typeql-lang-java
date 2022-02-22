@@ -60,4 +60,8 @@ public class Strings {
             return value.toString();
         }
     }
+
+    public static String stripTrailing(String string) {
+        return string.replaceFirst("\\s+$", "");
+    }
 }

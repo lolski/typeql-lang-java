@@ -78,6 +78,7 @@ import java.util.stream.Stream;
 import static com.vaticle.typedb.common.collection.Collections.pair;
 import static com.vaticle.typeql.lang.common.exception.ErrorMessage.ILLEGAL_GRAMMAR;
 import static com.vaticle.typeql.lang.common.exception.ErrorMessage.ILLEGAL_STATE;
+import static com.vaticle.typeql.lang.common.util.Strings.stripTrailing;
 import static com.vaticle.typeql.lang.common.util.Strings.unescapeRegex;
 import static com.vaticle.typeql.lang.pattern.variable.UnboundVariable.hidden;
 import static java.util.stream.Collectors.toList;
@@ -106,7 +107,7 @@ public class Parser extends TypeQLBaseVisitor {
             String rawTypeQLString, Function<TypeQLParser, CONTEXT> parserMethod, Function<CONTEXT, RETURN> visitor
     ) {
         if (rawTypeQLString == null) throw TypeQLException.of("Query String is NULL");
-        String typeQLString = rawTypeQLString.stripTrailing();
+        String typeQLString = stripTrailing(rawTypeQLString);
         if (typeQLString.isEmpty()) throw TypeQLException.of("Query String is empty or blank");
 
         ErrorListener errorListener = ErrorListener.of(typeQLString);
